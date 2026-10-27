@@ -61,6 +61,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                {/* Left Area: Charts & Lists */}
                 <div className="col-xl-9 col-lg-8">
                     <div className="row g-4">
                         <div className="col-12">
@@ -77,17 +78,14 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                {/* Right Area: Performance Details Sidebar Panel */}
                 <div className="col-xl-3 col-lg-4">
                     <div className="right-panel-wrapper d-flex flex-column gap-4 h-100">
                         <PerformanceCard />
-                        <PromoBanner
-                            title="Level up your sales managing to the next level."
-                            description="An easy way to manage sales with care and precision."
-                            buttonText="Check the updates now"
-                            onAction={() => console.log('Promo clicked')}
-                        />
+                        <PromoBanner />
                     </div>
                 </div>
+
             </div>
 
             <Footer />

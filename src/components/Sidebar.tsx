@@ -4,7 +4,7 @@ import Profile from './Profile';
 function Sidebar() {
     const links = [
         {label: 'Dashboard', icon: 'bi bi-grid-fill', path: '/'},
-        // {label: 'Basic Tables', icon: 'bi bi-table', path: '/basic-tables'},
+        {label: 'Basic Tables', icon: 'bi bi-table', path: '/basic-tables'},
         // {label: 'Form & Input', icon: 'bi bi-input-cursor-text', path: '/form-input'},
         {label: 'Buttons & Alerts', icon: 'bi bi-menu-button-wide-fill', path: '/buttons-alerts'},
         // {label: 'Blank Page', icon: 'bi bi-file-earmark', path: '/blank-page'},

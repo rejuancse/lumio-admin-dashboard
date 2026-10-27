@@ -35,6 +35,7 @@ function PerformanceCard() {
                 <Doughnut data={doughnutData} />
             </div>
 
+            {/* Custom Legends below the chart */}
             <div className="chart-legends-container">
                 {
                     legends.map( (legend, index) => {

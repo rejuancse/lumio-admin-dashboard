@@ -3040,21 +3040,10 @@ span.flatpickr-weekday {
     margin-left: -1.75rem;
     margin-right: -1.75rem;
     margin-bottom: -1.75rem;
+    margin-top: 1.25rem;
     overflow: hidden;
     border-bottom-left-radius: var(--radius-xxl);
     border-bottom-right-radius: var(--radius-xxl);
-}
-
-.lumioline-container {
-    height: 70px;
-}
-
-.lumioline-container > div {
-    height: 100%;
-}
-
-.lumioline-container canvas {
-    display: block;
 }
 
 .chart-legend-label {

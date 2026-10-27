@@ -354,70 +354,17 @@ function initDashboard() {
 
     // -----------------------------------------------------------------
     // 6. Desktop Sidebar Minimize Interaction
+    //    NOTE: Handled in React now (src/components/Header.tsx).
+    //    Vanilla listeners can't be used here because this module runs
+    //    before React renders the DOM, and the Header button remounts
+    //    on route changes.
     // -----------------------------------------------------------------
-    const desktopToggleBtn = document.querySelector('#desktop-sidebar-toggle');
-    if (desktopToggleBtn) {
-        desktopToggleBtn.addEventListener('click', function () {
-            document.body.classList.toggle('sidebar-minimized');
-
-            // Toggle icon direction
-            const icon = desktopToggleBtn.querySelector('i');
-            if (icon) {
-                if (document.body.classList.contains('sidebar-minimized')) {
-                    icon.className = 'bi bi-chevron-bar-right';
-                } else {
-                    icon.className = 'bi bi-chevron-bar-left';
-                }
-            }
-
-            // Trigger a window resize event so that charts (ApexCharts) redraw correctly
-            setTimeout(() => {
-                window.dispatchEvent(new Event('resize'));
-            }, 300);
-        });
-    }
 
     // -----------------------------------------------------------------
     // 7. Fullscreen Toggle Interaction
+    //    NOTE: Handled in React now (src/components/Header.tsx).
+    //    Same reason as section 6 above.
     // -----------------------------------------------------------------
-    const fullscreenBtn = document.querySelector('#btn-fullscreen');
-    if (fullscreenBtn) {
-        fullscreenBtn.addEventListener('click', function () {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().then(() => {
-                    updateFullscreenIcon(true);
-                }).catch(err => {
-                    console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen().then(() => {
-                    updateFullscreenIcon(false);
-                }).catch(err => {
-                    console.error(`Error attempting to exit fullscreen mode: ${err.message}`);
-                });
-            }
-        });
-
-        function updateFullscreenIcon(isFullscreen) {
-            const icon = fullscreenBtn.querySelector('i');
-            if (icon) {
-                if (isFullscreen) {
-                    icon.className = 'bi bi-fullscreen-exit';
-                } else {
-                    icon.className = 'bi bi-arrows-fullscreen';
-                }
-            }
-        }
-
-        // Listen for browser native fullscreen changes (e.g. Esc key)
-        document.addEventListener('fullscreenchange', () => {
-            if (document.fullscreenElement) {
-                updateFullscreenIcon(true);
-            } else {
-                updateFullscreenIcon(false);
-            }
-        });
-    }
 }
 
 if (document.readyState === 'loading') {

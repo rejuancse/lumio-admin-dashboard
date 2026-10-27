@@ -1,12 +1,55 @@
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import avatarImg from "../assets/images/avatar.png";
 
 function Header() {
+    const [sidebarMinimized, setSidebarMinimized] = useState(
+        () => document.body.classList.contains('sidebar-minimized')
+    );
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const handleDesktopToggle = () => {
+        // CSS in index.css (.sidebar-minimized) collapses the sidebar to icon-only
+        const isMinimized = document.body.classList.toggle('sidebar-minimized');
+        setSidebarMinimized(isMinimized);
+
+        // Let ApexCharts redraw after the 0.3s width transition
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 300);
+    };
+
+    const handleFullscreenToggle = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch((err) => {
+                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen().catch((err) => {
+                console.error(`Error attempting to exit fullscreen mode: ${err.message}`);
+            });
+        }
+    };
+
+    // Sync icon when fullscreen changes from anywhere (e.g. Esc key)
+    useEffect(() => {
+        const onFullscreenChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+    }, []);
+
     return (
         <header className="navbar-custom">
             <div className="navbar-left">
-                <Button outline className="btn-desktop-toggle" id="desktop-sidebar-toggle">
-                    <i className="bi bi-chevron-bar-left"></i>
+                <Button
+                    outline
+                    className="btn-desktop-toggle"
+                    id="desktop-sidebar-toggle"
+                    aria-label="Toggle Sidebar"
+                    aria-expanded={!sidebarMinimized}
+                    onClick={handleDesktopToggle}
+                >
+                    <i className={sidebarMinimized ? "bi bi-chevron-bar-right" : "bi bi-chevron-bar-left"}></i>
                 </Button>
 
                 {/* <Button className="sidebar-toggle-btn me-2" id="sidebar-toggle" aria-label="Toggle Navigation">
@@ -38,9 +81,13 @@ function Header() {
             </div>
 
             <div className="navbar-actions">
-                {/* Fullscreen Toggle */}
-                <button className="navbar-action-btn me-1" aria-label="Toggle Fullscreen" id="btn-fullscreen">
-                    <i className="bi bi-arrows-fullscreen"></i>
+                <button
+                    className="navbar-action-btn me-1"
+                    aria-label="Toggle Fullscreen"
+                    id="btn-fullscreen"
+                    onClick={handleFullscreenToggle}
+                >
+                    <i className={isFullscreen ? "bi bi-fullscreen-exit" : "bi bi-arrows-fullscreen"}></i>
                 </button>
                 <div className="dropdown">
                     <button className="navbar-action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
