@@ -3046,6 +3046,18 @@ span.flatpickr-weekday {
     border-bottom-right-radius: var(--radius-xxl);
 }
 
+.lumioline-container {
+    height: 80px;
+}
+
+.lumioline-container > div {
+    height: 100%;
+}
+
+.lumioline-container canvas {
+    display: block;
+}
+
 .chart-legend-label {
     font-size: 0.75rem;
     font-weight: 600;
