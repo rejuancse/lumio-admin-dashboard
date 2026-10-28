@@ -75,10 +75,10 @@ function Header() {
                 </div>
             </div>
 
-            <div className="navbar-search-wrapper">
+            {/* <div className="navbar-search-wrapper">
                 <input type="text" className="navbar-search-input" placeholder="Search anything in Lumio..." id="main-search" />
                 <Button className="navbar-search-btn"><i className="bi bi-search"></i></Button>
-            </div>
+            </div> */}
 
             <div className="navbar-actions">
                 <button

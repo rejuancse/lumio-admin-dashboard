@@ -412,10 +412,10 @@ body.sidebar-minimized .sidebar-profile {
     margin-top: -2rem;
     margin-left: -2.5rem;
     margin-right: -2.5rem;
-    padding: 1.25rem 2.5rem;
+    padding: .7rem 2.5rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     display: grid !important;
-    grid-template-columns: 1fr 480px 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
     align-items: center;
     margin-bottom: 2rem;
     gap: 1.5rem;
@@ -2905,7 +2905,15 @@ span.flatpickr-weekday {
 }
 
 .alert-custom-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     flex-grow: 1;
+}
+
+.alert-custom-content svg {
+    width: 16px;
+    height: 16px;
 }
 
 .alert-custom-close {
