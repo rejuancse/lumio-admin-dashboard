@@ -139,7 +139,9 @@ function Table( {config, orders} ) {
                             className="table-btn-action delete"
                             title="Delete row"
                             onClick={() => {
-                                setDeletedIds( (prev) => [...prev, order.id] )
+                                if ( window.confirm(`Are you sure you want to delete order "${order.id}"`) ) {
+                                    setDeletedIds( (prev) => [...prev, order.id] )
+                                }
                             }}
                             >
                             <i className="bi bi-trash"></i>
