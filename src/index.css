@@ -1824,6 +1824,40 @@ span.flatpickr-weekday {
     margin-bottom: 2rem;
 }
 
+/* Demo credentials hint box */
+.demo-credentials {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background-color: var(--brand-forest-medium);
+    color: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.75rem;
+}
+
+.demo-credentials i {
+    font-size: 1.1rem;
+    color: var(--brand-lime);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.demo-credentials-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    line-height: 1.4;
+}
+
+.demo-credentials-text strong {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--brand-lime);
+}
+
 .login-form-group {
     margin-bottom: 1.25rem;
     position: relative;

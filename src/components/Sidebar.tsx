@@ -6,9 +6,9 @@ function Sidebar() {
         {label: 'Dashboard', icon: 'bi bi-grid-fill', path: '/'},
         {label: 'Basic Tables', icon: 'bi bi-table', path: '/basic-tables'},
         {label: 'Buttons & Alerts', icon: 'bi bi-menu-button-wide-fill', path: '/buttons-alerts'},
+        {label: 'Login Screen', icon: 'bi bi-box-arrow-in-right', path: '/login-screen'},
         // {label: 'Form & Input', icon: 'bi bi-input-cursor-text', path: '/form-input'},
         // {label: 'Blank Page', icon: 'bi bi-file-earmark', path: '/blank-page'},
-        // {label: 'Login Screen', icon: 'bi bi-box-arrow-in-right', path: '/login-screen'},
         // {label: 'Error 404', icon: 'bi bi-slash-circle', path: '/error-page'},
     ];
 
