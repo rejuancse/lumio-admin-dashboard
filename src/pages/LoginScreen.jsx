@@ -186,19 +186,9 @@ function LoginScreen () {
 
                 <div className="login-divider">Or sign in with</div>
 
-                <div className="social-login-grid">
-                    <button className="btn-social" type="button" id="btn-google">
-                        <i className="bi bi-google text-danger"></i>
-                        <span>Google</span>
-                    </button>
-                    <button className="btn-social" type="button" id="btn-github">
-                        <i className="bi bi-github"></i>
-                        <span>GitHub</span>
-                    </button>
-                </div>
-
                 <p className="login-footer-text">
-                    Don't have an account? <a href="#" id="link-register">Register Now</a>
+                    Don't have an account?
+                    <a href="/register-now" id="link-register">Register Now</a>
                 </p>
             </div>
         </div>

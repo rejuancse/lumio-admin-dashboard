@@ -5,10 +5,13 @@ import Dashboard from './pages/Dashboard';
 import BasicTable from './pages/BasicTable';
 import ButtonsAlerts from './pages/ButtonsAlerts';
 import LoginScreen from './pages/LoginScreen';
+import RegisterNow from './pages/RegisterNow';
 
 function App() {
     const { currentPath } = useNavigation();
-    const hideSidebar = currentPath === '/login-screen';
+    const hideSidebar =
+        currentPath === '/login-screen' ||
+        currentPath === '/register-now';
 
     return (
         <div>
@@ -30,6 +33,10 @@ function App() {
 
             <Route path="/login-screen">
                 <LoginScreen />
+            </Route>
+
+            <Route path="/register-now">
+                <RegisterNow />
             </Route>
         </div>
     )
