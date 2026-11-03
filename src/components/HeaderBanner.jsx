@@ -1,4 +1,4 @@
-import Button from "./Button";
+// import Button from "./Button";
 
 function HeaderBanner({bannerTitle, bannerDesc, bannerButton}) {
     return (
@@ -8,13 +8,8 @@ function HeaderBanner({bannerTitle, bannerDesc, bannerButton}) {
                 <p className="page-subtitle">{bannerDesc}</p>
             </div>
 
-            {
-                bannerButton ? (
-                    <Button light outline id="date-picker-trigger">
-                        <i className="bi bi-calendar4-event"></i>
-                        <span id="selected-date-range">Documentation</span>
-                    </Button>
-                ) : (
+
+
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb mb-0">
                             <li className="breadcrumb-item">
@@ -24,8 +19,7 @@ function HeaderBanner({bannerTitle, bannerDesc, bannerButton}) {
                             <li className="breadcrumb-item active text-main" aria-current="page">{bannerTitle}</li>
                         </ol>
                     </nav>
-                )
-            }
+
         </div>
     )
 }
