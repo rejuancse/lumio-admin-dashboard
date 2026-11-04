@@ -1,7 +1,15 @@
 import classNames from 'classnames';
 import useNavigation from '../../hooks/useNavigation';
 
-export default function Link({to, children, className, activeClassName}) {
+interface LinkProps {
+    to: string;
+    children;
+    className?: string;
+    activeClassName?: string;
+    target?: string;
+}
+
+export default function Link({to, children, className, activeClassName, target}: LinkProps) {
     const { navigate, currentPath } = useNavigation();
 
     const classes = classNames(
@@ -9,8 +17,12 @@ export default function Link({to, children, className, activeClassName}) {
         currentPath === to && activeClassName
     )
 
-    const handleClick = (e) => {
-        if( e.metakey || e.ctrlKey ) {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        // target="_blank" hole browser ke notun tab e kholte dao (SPA navigation baad)
+        if (target === '_blank') {
+            return;
+        }
+        if( e.metaKey || e.ctrlKey ) {
             return
         }
         e.preventDefault();
@@ -21,7 +33,9 @@ export default function Link({to, children, className, activeClassName}) {
         <li className="sidebar-menu-item">
             <a
                 href={to}
-                className={classes} id="menu-basictables" onClick={handleClick}>
+                target={target}
+                rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                className={classes} onClick={handleClick}>
                 {children}
             </a>
         </li>

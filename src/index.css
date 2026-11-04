@@ -228,6 +228,15 @@ a:hover {
     transition: color 0.2s ease;
 }
 
+/* Reset default button styles for submenu toggle links */
+button.sidebar-menu-link {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 /* Active State & Hover States */
 .sidebar-menu-link:hover {
     color: #FFFFFF;
@@ -285,12 +294,19 @@ a:hover {
 }
 
 .sidebar-submenu-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     padding: 0.45rem 0;
     color: var(--text-sidebar-muted);
     font-size: 0.875rem;
     font-weight: 500;
     transition: color 0.2s;
+}
+
+.sidebar-submenu-link i {
+    font-size: 0.8rem;
+    opacity: 0.75;
 }
 
 .sidebar-submenu-link:hover {

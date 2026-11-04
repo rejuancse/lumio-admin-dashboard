@@ -3,9 +3,11 @@ import Route from './components/roots/Route';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import BasicTable from './pages/BasicTable';
-import ButtonsAlerts from './pages/ButtonsAlerts';
+import DefaultButtons from './pages/DefaultButtons';
+import DefaultAlerts from './pages/DefaultAlerts';
 import LoginScreen from './pages/LoginScreen';
 import RegisterNow from './pages/RegisterNow';
+import Profiles from './pages/Profiles';
 
 function App() {
     const { currentPath } = useNavigation();
@@ -25,8 +27,14 @@ function App() {
                     <Route path="/basic-tables">
                         <BasicTable />
                     </Route>
-                    <Route path="/buttons-alerts">
-                        <ButtonsAlerts />
+                    <Route path="/default-buttons">
+                        <DefaultButtons />
+                    </Route>
+                    <Route path="/default-alerts">
+                        <DefaultAlerts />
+                    </Route>
+                    <Route path="/profiles">
+                        <Profiles />
                     </Route>
                 </div>
             }
