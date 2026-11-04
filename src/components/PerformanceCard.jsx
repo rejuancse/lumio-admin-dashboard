@@ -1,4 +1,4 @@
-import Doughnut from './Doughnut';
+import Doughnut from './charts/Doughnut';
 
 const doughnutData = {
     labels: [

@@ -1,4 +1,4 @@
-import Lumioline from './Lumioline';
+import Lumioline from './charts/Lumioline';
 
 function StatCard({ label, value, trend, trendText, chartId }) {
     const trendClass = trend === "up" ? "trend-up" : "trend-down";

@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import HeaderBanner from '../components/HeaderBanner';
 import AlertCard from '../components/AlertCard';
 import StatCard from '../components/StatCard';
-import RevenueChart from '../components/RevenueChart';
+import RevenueChart from '../components/charts/RevenueChart';
 import TransactionCard from '../components/TransactionCard';
 import ProductOverviewCard from '../components/ProductOverviewCard';
 import PerformanceCard from '../components/PerformanceCard';

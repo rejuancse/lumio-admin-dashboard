@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "./Button";
+import Button from "./elements/Button";
 import avatarImg from "../assets/images/avatar.png";
 
 function Header() {

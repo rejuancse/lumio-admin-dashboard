@@ -1,5 +1,5 @@
 import useNavigation from './hooks/useNavigation';
-import Route from './components/Route';
+import Route from './components/roots/Route';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import BasicTable from './pages/BasicTable';

@@ -1,8 +1,8 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeaderBanner from '../components/HeaderBanner';
-import Button from '../components/Button';
-import Alert from '../components/Alert';
+import Button from '../components/elements/Button';
+import Alert from '../components/elements/Alert';
 import { FaSearch, FaInfoCircle, FaCheckCircle } from 'react-icons/fa';
 
 const bannerInfo = {

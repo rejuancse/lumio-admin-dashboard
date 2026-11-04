@@ -1,4 +1,4 @@
-import Link from "./Link";
+import Link from "./roots/Link";
 import Profile from './Profile';
 
 function Sidebar() {
