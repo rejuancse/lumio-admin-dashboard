@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 // Bootstrap CSS + Icons + JS
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap'
 
 // ApexCharts CSS
 import 'apexcharts/dist/apexcharts.css'

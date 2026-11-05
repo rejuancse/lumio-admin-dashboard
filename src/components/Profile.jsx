@@ -1,15 +1,108 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Modal } from 'bootstrap';
 import avatarImg from '../assets/images/avatar.png';
 import profileData from '../json-files/profile.json';
 
+// Build form state from the currently displayed data
+const buildFormState = (editFields, sourceFields) =>
+    Object.fromEntries(
+        editFields.map((field) => [
+            field.name,
+            sourceFields.find((item) => item.label === field.label)?.value || ''
+        ])
+    );
+
 function Profile() {
+    // Display data (initialized from the static JSON, updated via state)
+    const [profile, setProfile] = useState(profileData.profile);
+    const [personalInfo, setPersonalInfo] = useState(profileData.personalInfo);
+    const [addressInfo, setAddressInfo] = useState(profileData.addressInfo);
+
+    // Keep the latest display data accessible inside one-time modal event listeners
+    const personalInfoRef = useRef(personalInfo);
+    const addressInfoRef = useRef(addressInfo);
+    personalInfoRef.current = personalInfo;
+    addressInfoRef.current = addressInfo;
+
+    // Edit Personal Information form
+    const [personalForm, setPersonalForm] = useState(() =>
+        buildFormState(profileData.editPersonalFields, profileData.personalInfo));
+    const [personalErrors, setPersonalErrors] = useState({});
+
+    // Edit Address form
+    const [addressForm, setAddressForm] = useState(() =>
+        buildFormState(profileData.editAddressFields, profileData.addressInfo));
+    const [addressErrors, setAddressErrors] = useState({});
+
+    // Change Password form
     const [passwordForm, setPasswordForm] = useState({
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
     });
     const [passwordErrors, setPasswordErrors] = useState({});
+
+    // Re-sync the edit forms with the current data every time a modal opens,
+    // so unsaved changes are discarded when the modal is cancelled and re-opened
+    useEffect(() => {
+        const personalModal = document.getElementById('editProfileModal');
+        const addressModal = document.getElementById('editAddressModal');
+
+        const handlePersonalShow = () => {
+            setPersonalForm(buildFormState(profileData.editPersonalFields, personalInfoRef.current));
+            setPersonalErrors({});
+        };
+        const handleAddressShow = () => {
+            setAddressForm(buildFormState(profileData.editAddressFields, addressInfoRef.current));
+            setAddressErrors({});
+        };
+
+        personalModal?.addEventListener('show.bs.modal', handlePersonalShow);
+        addressModal?.addEventListener('show.bs.modal', handleAddressShow);
+
+        return () => {
+            personalModal?.removeEventListener('show.bs.modal', handlePersonalShow);
+            addressModal?.removeEventListener('show.bs.modal', handleAddressShow);
+        };
+    }, []);
+
+    const validatePersonalForm = () => {
+        const newErrors = {};
+
+        if (!personalForm.editFirstName.trim()) {
+            newErrors.editFirstName = 'First name is required';
+        }
+
+        if (!personalForm.editLastName.trim()) {
+            newErrors.editLastName = 'Last name is required';
+        }
+
+        if (!personalForm.editEmail.trim()) {
+            newErrors.editEmail = 'Email address is required';
+        } else if (!/^\S+@\S+\.\S+$/.test(personalForm.editEmail.trim())) {
+            newErrors.editEmail = 'Please enter a valid email address';
+        }
+
+        setPersonalErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const validateAddressForm = () => {
+        const newErrors = {};
+
+        if (!addressForm.editCountry.trim()) {
+            newErrors.editCountry = 'Country is required';
+        }
+
+        if (!addressForm.editCityState.trim()) {
+            newErrors.editCityState = 'City/State is required';
+        }
+
+        setAddressErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
 
     const validatePasswordForm = () => {
         const newErrors = {};
@@ -36,6 +129,65 @@ function Profile() {
         setPasswordErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
+    };
+
+    const handleFormChange = (setForm, setErrors, name, value) => {
+        setForm((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+        setErrors((prev) => ({
+            ...prev,
+            [name]: ''
+        }));
+    };
+
+    const handlePersonalSubmit = (e) => {
+        e.preventDefault();
+
+        if (!validatePersonalForm()) {
+            return;
+        }
+
+        // Update the displayed personal info with the saved form values
+        setPersonalInfo((prev) =>
+            prev.map((field) => {
+                const editField = profileData.editPersonalFields.find((f) => f.label === field.label);
+                return editField ? { ...field, value: personalForm[editField.name] } : field;
+            })
+        );
+
+        // Update the name shown in the profile summary (first + last name)
+        setProfile((prev) => ({
+            ...prev,
+            name: `${personalForm.editFirstName.trim()} ${personalForm.editLastName.trim()}`.trim()
+        }));
+
+        const modalEl = document.getElementById('editProfileModal');
+        if (modalEl) {
+            Modal.getOrCreateInstance(modalEl).hide();
+        }
+    };
+
+    const handleAddressSubmit = (e) => {
+        e.preventDefault();
+
+        if (!validateAddressForm()) {
+            return;
+        }
+
+        // Update the displayed address info with the saved form values
+        setAddressInfo((prev) =>
+            prev.map((field) => {
+                const editField = profileData.editAddressFields.find((f) => f.label === field.label);
+                return editField ? { ...field, value: addressForm[editField.name] } : field;
+            })
+        );
+
+        const modalEl = document.getElementById('editAddressModal');
+        if (modalEl) {
+            Modal.getOrCreateInstance(modalEl).hide();
+        }
     };
 
     const handlePasswordSubmit = (e) => {
@@ -74,24 +226,24 @@ function Profile() {
                 <div className="d-flex align-items-center gap-3 mb-4">
                     <img
                         src={avatarImg}
-                        alt={profileData.profile.name}
+                        alt={profile.name}
                         width="72"
                         height="72"
                         className="rounded-4 object-fit-cover flex-shrink-0" />
 
                     <div>
-                        <h3 className="fs-5 fw-bold mb-1">{profileData.profile.name}</h3>
+                        <h3 className="fs-5 fw-bold mb-1">{profile.name}</h3>
                         <div className="d-flex flex-wrap align-items-center gap-2 small text-secondary">
-                            <span>{profileData.profile.designation}</span>
+                            <span>{profile.designation}</span>
                             <span aria-hidden="true">&bull;</span>
-                            <span>{profileData.profile.location}</span>
+                            <span>{profile.location}</span>
                         </div>
                     </div>
                 </div>
 
                 {/* Personal fields */}
                 <div className="row g-4 mb-4">
-                    {profileData.personalInfo.map((field) => (
+                    {personalInfo.map((field) => (
                         <div className={field.col} key={field.id}>
                             <p className="form-label-custom">{field.label}</p>
                             <p className="mb-0 fw-semibold">{field.value}</p>
@@ -131,7 +283,7 @@ function Profile() {
                 </div>
 
                 <div className="row g-4">
-                    {profileData.addressInfo.map((field) => (
+                    {addressInfo.map((field) => (
                         <div className={field.col} key={field.id}>
                             <p className="form-label-custom">{field.label}</p>
                             <p className="mb-0 fw-semibold">{field.value}</p>
@@ -227,7 +379,9 @@ function Profile() {
                     <div className="modal-content rounded-4 p-2">
                         <div className="modal-header border-0 pb-0">
                             <div>
-                                <h5 className="modal-title fw-bold" id="editProfileModalLabel">Edit Personal Information</h5>
+                                <h5 className="modal-title fw-bold" id="editProfileModalLabel">
+                                    Edit Personal Information
+                                </h5>
                                 <p className="mb-0 small text-secondary">
                                     Update your details to keep your profile up-to-date.
                                 </p>
@@ -239,44 +393,52 @@ function Profile() {
                                 aria-label="Close"></button>
                         </div>
 
-                        <div className="modal-body pt-3">
-                            <div className="row g-3">
-                                {profileData.editPersonalFields.map((field) => (
-                                    <div className={field.col} key={field.id}>
-                                        <label className="form-label-custom" htmlFor={field.name}>{field.label}</label>
-                                        {field.type === 'textarea' ? (
-                                            <textarea
-                                                className="form-control-custom"
-                                                id={field.name}
-                                                placeholder={field.placeholder}
-                                                defaultValue={field.value || ''}></textarea>
-                                        ) : (
-                                            <input
-                                                type={field.type}
-                                                className="form-control-custom"
-                                                id={field.name}
-                                                placeholder={field.placeholder}
-                                                defaultValue={field.value || ''} />
-                                        )}
-                                    </div>
-                                ))}
+                        <form onSubmit={handlePersonalSubmit} noValidate>
+                            <div className="modal-body pt-3">
+                                <div className="row g-3">
+                                    {profileData.editPersonalFields.map((field) => (
+                                        <div className={field.col} key={field.id}>
+                                            <label className="form-label-custom" htmlFor={field.name}>{field.label}</label>
+                                            {field.type === 'textarea' ? (
+                                                <textarea
+                                                    className={`form-control-custom ${personalErrors[field.name] ? 'is-invalid-custom' : ''}`}
+                                                    id={field.name}
+                                                    placeholder={field.placeholder}
+                                                    value={personalForm[field.name]}
+                                                    onChange={(e) => handleFormChange(setPersonalForm, setPersonalErrors, field.name, e.target.value)}></textarea>
+                                            ) : (
+                                                <input
+                                                    type={field.type}
+                                                    className={`form-control-custom ${personalErrors[field.name] ? 'is-invalid-custom' : ''}`}
+                                                    id={field.name}
+                                                    placeholder={field.placeholder}
+                                                    value={personalForm[field.name]}
+                                                    onChange={(e) => handleFormChange(setPersonalForm, setPersonalErrors, field.name, e.target.value)} />
+                                            )}
+                                            {personalErrors[field.name] && (
+                                                <small className="form-feedback-custom invalid-custom">
+                                                    {personalErrors[field.name]}
+                                                </small>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="modal-footer border-0 pt-0">
-                            <button
-                                type="button"
-                                className="btn-custom btn-custom-light"
-                                data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button
-                                type="button"
-                                className="btn-custom btn-custom-primary"
-                                data-bs-dismiss="modal">
-                                Save Changes
-                            </button>
-                        </div>
+                            <div className="modal-footer border-0 pt-0">
+                                <button
+                                    type="button"
+                                    className="btn-custom btn-custom-light"
+                                    data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="btn-custom btn-custom-primary">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -299,36 +461,43 @@ function Profile() {
                                 aria-label="Close"></button>
                         </div>
 
-                        <div className="modal-body pt-3">
-                            <div className="row g-3">
-                                {profileData.editAddressFields.map((field) => (
-                                    <div className={field.col} key={field.id}>
-                                        <label className="form-label-custom" htmlFor={field.name}>{field.label}</label>
-                                        <input
-                                            type={field.type}
-                                            className="form-control-custom"
-                                            id={field.name}
-                                            placeholder={field.placeholder}
-                                            defaultValue={field.value || ''} />
-                                    </div>
-                                ))}
+                        <form onSubmit={handleAddressSubmit} noValidate>
+                            <div className="modal-body pt-3">
+                                <div className="row g-3">
+                                    {profileData.editAddressFields.map((field) => (
+                                        <div className={field.col} key={field.id}>
+                                            <label className="form-label-custom" htmlFor={field.name}>{field.label}</label>
+                                            <input
+                                                type={field.type}
+                                                className={`form-control-custom ${addressErrors[field.name] ? 'is-invalid-custom' : ''}`}
+                                                id={field.name}
+                                                placeholder={field.placeholder}
+                                                value={addressForm[field.name]}
+                                                onChange={(e) => handleFormChange(setAddressForm, setAddressErrors, field.name, e.target.value)} />
+                                            {addressErrors[field.name] && (
+                                                <small className="form-feedback-custom invalid-custom">
+                                                    {addressErrors[field.name]}
+                                                </small>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="modal-footer border-0 pt-0">
-                            <button
-                                type="button"
-                                className="btn-custom btn-custom-light"
-                                data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button
-                                type="button"
-                                className="btn-custom btn-custom-primary"
-                                data-bs-dismiss="modal">
-                                Save Changes
-                            </button>
-                        </div>
+                            <div className="modal-footer border-0 pt-0">
+                                <button
+                                    type="button"
+                                    className="btn-custom btn-custom-light"
+                                    data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="btn-custom btn-custom-primary">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
