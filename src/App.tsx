@@ -24,6 +24,9 @@ function App() {
                     <Route path="/">
                         <Dashboard />
                     </Route>
+                    <Route path="/ecommerce">
+                        <Dashboard />
+                    </Route>
                     <Route path="/basic-tables">
                         <BasicTable />
                     </Route>

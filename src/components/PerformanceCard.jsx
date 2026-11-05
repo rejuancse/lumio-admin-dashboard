@@ -27,7 +27,7 @@ const legends = [
 function PerformanceCard() {
     return (
         <div className="card flex-grow-1 d-flex flex-column justify-content-between mb-0">
-            <div className="card-header mb-1">
+            <div className="card-header mb-5">
                 <h2 className="card-title">Total View Performance</h2>
             </div>
 

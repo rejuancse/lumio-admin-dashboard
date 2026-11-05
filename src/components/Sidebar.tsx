@@ -6,7 +6,23 @@ function Sidebar() {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
 
     const links = [
-        {label: 'Dashboard', icon: 'bi bi-grid-fill', path: '/'},
+        {
+            label: 'Dashboard',
+            icon: 'bi bi-grid-fill',
+            path: '/',
+            submenu: [
+                {
+                    label: 'Default',
+                    icon: 'bi bi-mouse2-fill',
+                    path: '/'
+                },
+                {
+                    label: 'Ecommerce',
+                    icon: 'bi bi-bell-fill',
+                    path: '/ecommerce'
+                },
+            ]
+        },
         {label: 'Basic Tables', icon: 'bi bi-table', path: '/basic-tables'},
         {
             label: 'Buttons & Alerts',
