@@ -9,7 +9,13 @@ interface LinkProps {
     target?: string;
 }
 
-export default function Link({to, children, className, activeClassName, target}: LinkProps) {
+function Link({
+    to,
+    children,
+    className,
+    activeClassName,
+    target
+}: LinkProps) {
     const { navigate, currentPath } = useNavigation();
 
     const classes = classNames(
@@ -41,3 +47,5 @@ export default function Link({to, children, className, activeClassName, target}:
         </li>
     )
 }
+
+export default Link;

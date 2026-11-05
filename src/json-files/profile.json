@@ -1,0 +1,199 @@
+{
+    "profile": {
+        "name": "Rejuan Ahamed",
+        "designation": "Sr. Software Engineer",
+        "location": "Leeds, Bangladesh"
+    },
+    "personalInfo": [
+        {
+            "id": 1,
+            "label": "First Name",
+            "value": "Rejuan",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 2,
+            "label": "Last Name",
+            "value": "Ahamed",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 3,
+            "label": "Email Address",
+            "value": "rejuan@lumioadmin.com",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 4,
+            "label": "Phone",
+            "value": "+880 1712 345 678",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 5,
+            "label": "Bio",
+            "value": "Sr. Software Engineer with 10+ years of experience leading cross-functional product teams and delivering customer-focused solutions.",
+            "col": "col-12"
+        }
+    ],
+    "socialLinks": [
+        {
+            "id": 1,
+            "label": "Facebook",
+            "url": "https://facebook.com",
+            "icon": "bi bi-facebook"
+        },
+        {
+            "id": 2,
+            "label": "X (Twitter)",
+            "url": "https://x.com",
+            "icon": "bi bi-twitter-x"
+        },
+        {
+            "id": 3,
+            "label": "LinkedIn",
+            "url": "https://linkedin.com",
+            "icon": "bi bi-linkedin"
+        },
+        {
+            "id": 4,
+            "label": "Instagram",
+            "url": "https://instagram.com",
+            "icon": "bi bi-instagram"
+        }
+    ],
+    "addressInfo": [
+        {
+            "id": 1,
+            "label": "Country",
+            "value": "Bangladesh",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 2,
+            "label": "City/State",
+            "value": "Dhaka",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 3,
+            "label": "Postal Code",
+            "value": "1216",
+            "col": "col-12 col-sm-6 col-lg-3"
+        },
+        {
+            "id": 4,
+            "label": "TAX ID",
+            "value": "BIN-0011223344",
+            "col": "col-12 col-sm-6 col-lg-3"
+        }
+    ],
+    "editPersonalFields": [
+        {
+            "id": 1,
+            "name": "editFirstName",
+            "label": "First Name",
+            "type": "text",
+            "placeholder": "First name",
+            "value": "Rejuan",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 2,
+            "name": "editLastName",
+            "label": "Last Name",
+            "type": "text",
+            "placeholder": "Last name",
+            "value": "Ahamed",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 3,
+            "name": "editEmail",
+            "label": "Email Address",
+            "type": "email",
+            "placeholder": "Email address",
+            "value": "rejuan@lumioadmin.com",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 4,
+            "name": "editPhone",
+            "label": "Phone",
+            "type": "text",
+            "placeholder": "Phone number",
+            "value": "+880 1712 345 678",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 5,
+            "name": "editBio",
+            "label": "Bio",
+            "type": "textarea",
+            "placeholder": "Short bio about you",
+            "value": null,
+            "col": "col-12"
+        }
+    ],
+    "editAddressFields": [
+        {
+            "id": 1,
+            "name": "editCountry",
+            "label": "Country",
+            "type": "text",
+            "placeholder": "Country",
+            "value": "Bangladesh",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 2,
+            "name": "editCityState",
+            "label": "City/State",
+            "type": "text",
+            "placeholder": "City/State",
+            "value": "Dhaka",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 3,
+            "name": "editPostalCode",
+            "label": "Postal Code",
+            "type": "text",
+            "placeholder": "Postal code",
+            "value": "1216",
+            "col": "col-12 col-sm-6"
+        },
+        {
+            "id": 4,
+            "name": "editTaxId",
+            "label": "TAX ID",
+            "type": "text",
+            "placeholder": "TAX ID",
+            "value": "BIN-0011223344",
+            "col": "col-12 col-sm-6"
+        }
+    ],
+    "changePasswordFields": [
+        {
+            "id": 1,
+            "name": "currentPassword",
+            "label": "Current Password",
+            "type": "password",
+            "placeholder": "Enter current password"
+        },
+        {
+            "id": 2,
+            "name": "newPassword",
+            "label": "New Password",
+            "type": "password",
+            "placeholder": "Enter new password"
+        },
+        {
+            "id": 3,
+            "name": "confirmPassword",
+            "label": "Confirm Password",
+            "type": "password",
+            "placeholder": "Confirm new password"
+        }
+    ]
+}

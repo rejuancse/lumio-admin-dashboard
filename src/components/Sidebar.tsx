@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from "./roots/Link";
-import Profile from './Profile';
+import avatarImg from "../assets/images/avatar.png";
 
 function Sidebar() {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -115,7 +115,17 @@ function Sidebar() {
 
             <div>
                 <a href="/profiles">
-                    <Profile name="Administrator" email="admin@email.com" />
+                    <div className="sidebar-profile">
+                        <img
+                            src={avatarImg}
+                            alt="Administrator"
+                            className="sidebar-profile-img"
+                        />
+                        <div className="sidebar-profile-info">
+                            <div className="sidebar-profile-name">Administrator</div>
+                            <div className="sidebar-profile-email">admin@email.com</div>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
