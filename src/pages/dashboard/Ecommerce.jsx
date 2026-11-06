@@ -6,6 +6,7 @@ import TransactionCard from '../../components/TransactionCard';
 import ProductOverviewCard from '../../components/ProductOverviewCard';
 import PerformanceCard from '../../components/PerformanceCard';
 import PromoBanner from '../../components/PromoBanner';
+import DemographicMap from '../../components/charts/DemographicMap';
 
 const bannerInfo = {
     title: 'Dashboard',
@@ -30,6 +31,33 @@ const statsData = [
     }
 ];
 
+const demographicData = [
+    {
+        id: 1,
+        name: "USA",
+        code: "us",
+        customers: 2379,
+        percentage: 40.99,
+        coordinates: [-98, 39],
+    },
+    {
+        id: 2,
+        name: "France",
+        code: "fr",
+        customers: 589,
+        percentage: 59.01,
+        coordinates: [2.2, 46.2],
+    },
+    {
+        id: 3,
+        name: "Yemen",
+        code: "ye",
+        customers: 412,
+        percentage: 32.40,
+        coordinates: [48.5, 15.5],
+    },
+];
+
 export default function Dashboard() {
     return (
         <>
@@ -38,6 +66,8 @@ export default function Dashboard() {
                 bannerDesc={bannerInfo.desc}
                 bannerButton={bannerInfo.button}
             />
+
+            <DemographicMap />
 
             <div className="row g-4">
                 <div className="col-12">

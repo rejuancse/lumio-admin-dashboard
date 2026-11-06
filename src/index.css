@@ -3252,3 +3252,21 @@ span.flatpickr-weekday {
 .text-lime {
     color: var(--brand-lime) !important;
 }
+
+/* Demographic Map Country Hover */
+.demographic-country {
+    transition: fill 0.25s ease, transform 0.25s ease;
+    transform-box: fill-box;
+    transform-origin: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.demographic-country:hover {
+    fill: #1F2937;
+    transform: scale(1.08);
+}
+
+.demographic-country:focus {
+    outline: none;
+}
