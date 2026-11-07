@@ -8,6 +8,9 @@ import {
 } from "react-simple-maps";
 
 import countries from "world-atlas/countries-110m.json";
+import usaFlag from "../../assets/images/country/usa.png";
+import franceFlag from "../../assets/images/country/france.png";
+import yemenFlag from "../../assets/images/country/yemen.png";
 
 const demographicData = [
     {
@@ -17,6 +20,7 @@ const demographicData = [
         customers: 2379,
         percentage: 40.99,
         coordinates: [-98, 39],
+        image: usaFlag
     },
     {
         id: 2,
@@ -25,6 +29,7 @@ const demographicData = [
         customers: 589,
         percentage: 59.01,
         coordinates: [2.2, 46.2],
+        image: franceFlag
     },
     {
         id: 3,
@@ -33,6 +38,7 @@ const demographicData = [
         customers: 412,
         percentage: 32.40,
         coordinates: [48.5, 15.5],
+        image: yemenFlag
     },
 ];
 
@@ -78,10 +84,10 @@ const DemographicMap = ({ data = demographicData }) => {
             <ComposableMap
                 projection="geoEqualEarth"
                 projectionConfig={{
-                    scale: 145,
+                    scale: 160,
                 }}
                 width={800}
-                height={340}
+                height={500}
                 style={{
                     width: "100%",
                     height: "auto",
@@ -121,6 +127,46 @@ const DemographicMap = ({ data = demographicData }) => {
                     ))}
                 </ZoomableGroup>
             </ComposableMap>
+
+            <ul className="list-unstyled mb-0">
+                {data.map((country, index) => (
+                    <li
+                        key={index}
+                        className="d-flex align-items-center justify-content-between py-3 border-bottom"
+                    >
+                        {/* Country Info */}
+                        <div className="d-flex align-items-center gap-3">
+                            <div
+                                className="rounded-3 overflow-hidden flex-shrink-0 border"
+                                style={{ width: "40px", height: "40px" }}
+                                >
+                                <img src={country.image}
+                                    alt={country.name}
+                                    className="w-100 h-100 object-fit-cover"
+                                />
+                            </div>
+
+                            <div>
+                                <h6 className="mb-1 fw-semibold text-dark">
+                                    {country.name}
+                                </h6>
+                                <small className="text-muted">
+                                    {country.customers} Customers
+                                </small>
+                            </div>
+                        </div>
+
+                        <div className="text-end">
+                            <h6 className="mb-1 fw-semibold text-dark">
+                                {country.percentage}%
+                            </h6>
+                            <small className="text-muted">
+                                Total Sales
+                            </small>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
